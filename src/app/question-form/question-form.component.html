@@ -1,0 +1,39 @@
+<form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="question">Question:</label>
+    <input id="question" type="text" formControlName="question">
+  </div>
+
+  <div>
+    <label for="type">Answer yype:</label>
+    <select id="type" formControlName="type" (change)="onTypeChange()">
+      <option value="text">Text</option>
+      <option value="number">Number</option>
+      <option value="date">Date</option>
+    </select>
+  </div>
+
+  <div *ngIf="selectedType === 'text'">
+    <label for="answerText">Text Answer:</label>
+    <input id="answerText" type="text" formControlName="answerText">
+    <label for="textMaxLength">Max Text Length:</label>
+    <input id="textMaxLength" type="number" formControlName="textMaxLength">
+  </div>
+
+  <div *ngIf="selectedType === 'number'">
+    <label for="answerNumber">Number Answer:</label>
+    <input id="answerNumber" type="number" formControlName="answerNumber">
+    <label for="maxNumber">Max Number Value:</label>
+    <input id="maxNumber" type="number" min="1" formControlName="maxNumber">
+  </div>
+
+  <div *ngIf="selectedType === 'date'">
+    <label for="answerDate">Date Answer:</label>
+    <input id="answerDate" type="date" formControlName="answerDate">
+  </div>
+
+  <div class="navigation-buttons">
+    <button type="button" (click)="onNextQuestion()">Next Question</button>
+    <button type="submit">Submit</button>
+  </div>
+</form>
