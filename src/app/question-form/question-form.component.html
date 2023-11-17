@@ -1,39 +1,89 @@
-<form [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+<form (ngSubmit)="onSubmit()" [formGroup]="questionForm">
   <div>
     <label for="question">Question:</label>
-    <input id="question" type="text" formControlName="question">
+
+    <input formControlName="question"
+           id="question"
+           type="text">
   </div>
 
   <div>
-    <label for="type">Answer yype:</label>
-    <select id="type" formControlName="type" (change)="onTypeChange()">
+    <label for="type">Answer type:</label>
+    <select (change)="onTypeChange()" formControlName="type" id="type">
       <option value="text">Text</option>
+
       <option value="number">Number</option>
+
       <option value="date">Date</option>
+
+      <option value="pin">PIN</option>
     </select>
   </div>
 
   <div *ngIf="selectedType === 'text'">
     <label for="answerText">Text Answer:</label>
-    <input id="answerText" type="text" formControlName="answerText">
+
+    <input [maxlength]="questionForm.get('textMaxLength')?.value"
+           formControlName="answerText"
+           id="answerText"
+           type="text">
+
     <label for="textMaxLength">Max Text Length:</label>
-    <input id="textMaxLength" type="number" formControlName="textMaxLength">
+
+    <input formControlName="textMaxLength"
+           id="textMaxLength"
+           type="number">
   </div>
 
   <div *ngIf="selectedType === 'number'">
     <label for="answerNumber">Number Answer:</label>
-    <input id="answerNumber" type="number" formControlName="answerNumber">
+
+    <input (blur)="validateMaxNumber()"
+           [max]="questionForm.get('maxNumber')?.value"
+           formControlName="answerNumber"
+           id="answerNumber"
+           type="number">
+
     <label for="maxNumber">Max Number Value:</label>
-    <input id="maxNumber" type="number" min="1" formControlName="maxNumber">
+
+    <input formControlName="maxNumber"
+           id="maxNumber" min="1"
+           type="number">
   </div>
 
   <div *ngIf="selectedType === 'date'">
     <label for="answerDate">Date Answer:</label>
-    <input id="answerDate" type="date" formControlName="answerDate">
+
+    <input formControlName="answerDate"
+           id="answerDate"
+           type="date">
+  </div>
+
+  <div *ngIf="selectedType === 'pin'">
+    <label for="pin">PIN:</label>
+
+    <input (input)="filterPinInput($event)"
+           [maxlength]="questionForm.get('pinLength')?.value"
+           [pattern]="pinPattern"
+           formControlName="pin" id="pin"
+           type="text">
+
+    <label for="pinLength">Number of Digits in PIN (3-8):</label>
+
+    <input (blur)="validateMaxPinLength()"
+           (change)="validateMaxPinLength()"
+           formControlName="pinLength"
+           id="pinLength"
+           max="8"
+           min="3"
+           type="number">
   </div>
 
   <div class="navigation-buttons">
-    <button type="button" (click)="onNextQuestion()">Next Question</button>
+    <button (click)="onNextQuestion()" type="button">
+      Next Question
+    </button>
+
     <button type="submit">Submit</button>
   </div>
 </form>
