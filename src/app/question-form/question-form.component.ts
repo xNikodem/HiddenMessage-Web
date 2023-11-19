@@ -1,25 +1,29 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, FormsModule, Validators} from '@angular/forms';
 import {QuestionDto} from "../dto/question-dto.model";
 import * as FormConst from "../constants/form.const";
+import {SnackbarService} from "../notifications/snackbar.service";
+
 
 @Component({
   selector: 'app-question-form',
   templateUrl: './question-form.component.html',
-  styleUrls: ['./question-form.component.scss']
+  styleUrls: ['./question-form.component.scss'],
 })
 export class QuestionFormComponent implements OnInit {
   public questionForm!: FormGroup;
   public selectedType: string = 'text';
   public pinPattern: string = '[0-9]{3}';
+  public questionNumber: number = 1;
   private questionHistory: QuestionDto[] = [];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,
+              private snackbarService: SnackbarService) {
   }
 
   public ngOnInit(): void {
     this.questionForm = this.fb.group({
-      question: ['', Validators.required],
+      description: ['', Validators.required],
       type: [FormConst.TYPE_TEXT],
       answerText: [''],
       pinLength: [FormConst.MIN_PIN_LENGTH],
@@ -48,14 +52,28 @@ export class QuestionFormComponent implements OnInit {
 
   public onSubmit(): void {
     console.log('Final questions:', this.questionHistory);
+    this.questionNumber = 1;
   }
 
   public onNextQuestion(): void {
-    const formValue = this.questionForm.value;
-    const newQuestion = new QuestionDto(formValue.question, formValue.type, this.getCurrentAnswer(formValue));
-    this.questionHistory.push(newQuestion);
-    this.questionForm.reset({type: FormConst.TYPE_TEXT});
-    this.onTypeChange();
+    if (this.isFormValid()) {
+      const formValue = this.questionForm.value;
+      const newQuestion = new QuestionDto(formValue.question, formValue.type, this.getCurrentAnswer(formValue));
+      this.questionHistory.push(newQuestion);
+
+      this.questionForm.patchValue({
+        description: '',
+        answerText: '',
+        answerNumber: '',
+        answerDate: '',
+        pin: ''
+      });
+
+      this.onTypeChange();
+      this.questionNumber++;
+    } else {
+      this.snackbarService.openSnackbar('An error occurred', 'Retry', 500000);
+    }
   }
 
   public validateMaxPinLength(): void {
@@ -124,6 +142,28 @@ export class QuestionFormComponent implements OnInit {
         return formValue.pin;
       default:
         return '';
+    }
+  }
+
+  private isFormValid(): boolean {
+    const formValue = this.questionForm.value;
+    console.log(this.questionForm.value);
+    if (!formValue.description) {
+
+      return false;
+    }
+
+    switch (formValue.type) {
+      case FormConst.TYPE_TEXT:
+        return !!formValue.answerText;
+      case FormConst.TYPE_NUMBER:
+        return formValue.answerNumber !== null && formValue.answerNumber !== '';
+      case FormConst.TYPE_DATE:
+        return !!formValue.answerDate;
+      case FormConst.TYPE_PIN:
+        return formValue.pin && formValue.pin.length === formValue.pinLength;
+      default:
+        return true;
     }
   }
 }

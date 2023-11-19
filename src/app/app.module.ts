@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import {RouterOutlet} from "@angular/router";
 import { MainPageComponent } from './main-page/main-page.component';
 import { QuestionFormComponent } from './question-form/question-form.component';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { QuestionFormComponent } from './question-form/question-form.component';
         RouterOutlet,
         FormsModule,
         ReactiveFormsModule,
+        MatSnackBarModule,
+        BrowserAnimationsModule,
     ],
   providers: [],
   bootstrap: [AppComponent]

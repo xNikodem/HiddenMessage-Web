@@ -1,0 +1,80 @@
+@import "../styles/glass.styles.scss";
+@import "../styles/mixin-basics";
+
+.container {
+  background: url('/assets/imgs/spaceBackground.png') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  .glass-container {
+    @include width-height(30rem, auto);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    gap: 1rem;
+
+    label {
+      background: none;
+      color: white;
+    }
+
+
+    textarea {
+      height: 4rem;
+      font-size: 0.8rem;
+      max-width: 20rem;
+      max-height: 10rem;
+      min-width: 20rem;
+      min-height: 10rem;
+    }
+
+    textarea,
+    input,
+    select,
+    button {
+      background: rgba(0, 0, 0, 0.05);
+      backdrop-filter: blur(15px);
+      border: none;
+      border-radius: 5px;
+      color: white;
+      margin-bottom: 0.5rem;
+      padding: 0.75rem;
+      width: 90%;
+    }
+
+    input,
+    select {
+      font-size: 1rem;
+    }
+
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+      min-width: 8rem;
+    }
+
+    button {
+      cursor: pointer;
+      transition: background-color 0.3s;
+      &:hover {
+        background-color: rgba(0, 140, 255, 0.8);
+      }
+    }
+
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      width: 90%;
+      gap:2rem;
+    }
+  }
+}
+.custom-snackbar {
+  z-index: 10000; /* Użyj wyższej wartości, aby upewnić się, że jest na wierzchu */
+}
+
