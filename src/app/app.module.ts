@@ -12,7 +12,8 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import { RegisterPageComponent } from './register-page/register-page.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {JwtInterceptor} from "./security/jwt.interceptor";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,9 @@ import {HttpClientModule} from "@angular/common/http";
       MatButtonModule,
       HttpClientModule,
     ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from "@angular/router";
+import {AuthService} from "../service/auth.service";
 
 @Component({
   selector: 'app-login-page',
@@ -9,13 +10,16 @@ import {Router} from "@angular/router";
 })
 export class LoginPageComponent implements OnInit {
   loginForm!: FormGroup;
+  public loginError: string | null = null;
   private interBubble: HTMLDivElement | null = null;
   private curX = 0;
   private curY = 0;
   private tgX = 0;
   private tgY = 0;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private authService: AuthService,
+              private formBuilder: FormBuilder,
+              private router: Router) {
   }
 
   public ngOnInit(): void {
@@ -25,12 +29,19 @@ export class LoginPageComponent implements OnInit {
     });
     this.interBubble = document.querySelector('.interactive');
     this.move();
+    this.authService.logout();
   }
 
   public onSubmit() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
-      // Logika logowania
+      this.authService.login(this.loginForm.value).subscribe({
+        next: token => {
+          this.router.navigate(['/main']);
+        },
+        error: error => {
+          this.loginError = error.error;
+        }
+      });
     }
   }
 
