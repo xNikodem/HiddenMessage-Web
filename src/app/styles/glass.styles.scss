@@ -16,18 +16,22 @@
   color: white;
 }
 
-.glass-container button {
-  background-color: rgba(0, 140, 255, 0.65);
-  color: white;
+.glass-container  button {
+  background: rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(15px);
   border: none;
-  padding: $DEFAULT_PAGE_PADDING_LOWEST $DEFAULT_PAGE_PADDING_LOWER;
   border-radius: $DEFAULT_BORDER_RADIUS_LOWEST;
-  cursor: pointer;
-  margin-top: $DEFAULT_PAGE_MARGIN_LOWER;
-  font-size: $FONT_SIZE_DEFAULT;
-  transition: background-color 0.3s;
+  color: white;
+  margin-bottom: $DEFAULT_PAGE_MARGIN_LOWEST;
+  padding: $DEFAULT_PAGE_PADDING_LOWEST;
+  width: 90%;
 }
 
-.glass-container button:hover {
-  background-color: rgb(0, 140, 255);
+.glass-container button {
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: rgba(0, 140, 255, 0.8);
+  }
 }

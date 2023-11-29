@@ -72,7 +72,7 @@ export class QuestionFormComponent implements OnInit {
       this.onTypeChange();
       this.questionNumber++;
     } else {
-      this.snackbarService.openSnackbar('An error occurred', 'Retry', 500000);
+      this.snackbarService.openSnackbar('Fill the fields', 'Close', 3000);
     }
   }
 
@@ -106,6 +106,11 @@ export class QuestionFormComponent implements OnInit {
   private handleMaxNumberChange = (maxNumber: number): void => {
     this.questionForm.get(FormConst.NAME_ANSWER_NUMBER)?.setValidators(Validators.max(maxNumber || FormConst.DEFAULT_MAX_NUMBER));
     this.questionForm.get(FormConst.NAME_ANSWER_NUMBER)?.updateValueAndValidity();
+
+    let currentNumber = this.questionForm.get(FormConst.NAME_ANSWER_NUMBER)?.value;
+    if (currentNumber !== null && currentNumber !== '' && currentNumber > maxNumber) {
+      this.questionForm.get(FormConst.NAME_ANSWER_NUMBER)?.setValue(maxNumber);
+    }
   }
 
   private adjustTextLength(maxLength: number): void {

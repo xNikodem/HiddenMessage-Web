@@ -8,12 +8,18 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { QuestionFormComponent } from './question-form/question-form.component';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LoginPageComponent } from './login-page/login-page.component';
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
+import { RegisterPageComponent } from './register-page/register-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
-    QuestionFormComponent
+    QuestionFormComponent,
+    LoginPageComponent,
+    RegisterPageComponent
   ],
     imports: [
         BrowserModule,
@@ -23,6 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         ReactiveFormsModule,
         MatSnackBarModule,
         BrowserAnimationsModule,
+      MatInputModule,
+      MatButtonModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
