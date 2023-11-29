@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, FormsModule, Validators} from '@angular/forms';
-import {QuestionDto} from "../dto/question-dto.model";
+import {QuestionDto} from "../dto/question.dto";
 import * as FormConst from "../constants/form.const";
 import {SnackbarService} from "../notifications/snackbar.service";
 

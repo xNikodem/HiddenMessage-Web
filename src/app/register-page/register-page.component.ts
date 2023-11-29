@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../service/auth.service";
+import {Router} from "@angular/router";
+import {UserDto} from "../dto/user.dto";
 
 @Component({
   selector: 'app-register-page',
@@ -9,8 +12,11 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class RegisterPageComponent implements OnInit {
   public registerForm!: FormGroup;
   public isSubmitted = false;
+  public  errorMessage: string = '';
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,
+              private authService: AuthService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -26,7 +32,20 @@ export class RegisterPageComponent implements OnInit {
   public onSubmit() {
     this.isSubmitted = true;
     if (this.registerForm.valid) {
-      console.log("valid");
+      const userDto: UserDto = {
+        username: this.registerForm.get('username')?.value,
+        password: this.registerForm.get('password')?.value
+      };
+      this.authService.register(userDto).subscribe(
+        response => {
+          console.log(response)
+          this.router.navigate(['/main'])
+        },
+        error => {
+          console.log(error)
+          this.errorMessage = error.error
+        }
+      );
     }
   }
 

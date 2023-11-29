@@ -12,6 +12,7 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import { RegisterPageComponent } from './register-page/register-page.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
         BrowserAnimationsModule,
       MatInputModule,
       MatButtonModule,
+      HttpClientModule,
     ],
   providers: [],
   bootstrap: [AppComponent]
