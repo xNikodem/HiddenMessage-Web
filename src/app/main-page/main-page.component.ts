@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import {SnackbarService} from "../notifications/snackbar.service";
 
 @Component({
   selector: 'app-main-page',
