@@ -17,7 +17,7 @@ export class MainPageComponent implements OnInit {
   constructor(private router:Router) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.interBubble = document.querySelector('.interactive');
     this.move();
   }
@@ -40,7 +40,7 @@ export class MainPageComponent implements OnInit {
     this.tgY = event.clientY;
   }
 
-  create() {
+  public create() {
     this.router.navigate(['/create-message']);
   }
 }
