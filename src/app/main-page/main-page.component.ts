@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import {SnackbarService} from "../notifications/snackbar.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-main-page',
@@ -13,7 +14,10 @@ export class MainPageComponent implements OnInit {
   private tgX = 0;
   private tgY = 0;
 
-  ngOnInit(): void {
+  constructor(private router:Router) {
+  }
+
+  public ngOnInit(): void {
     this.interBubble = document.querySelector('.interactive');
     this.move();
   }
@@ -34,5 +38,9 @@ export class MainPageComponent implements OnInit {
   onMouseMove(event: MouseEvent) {
     this.tgX = event.clientX;
     this.tgY = event.clientY;
+  }
+
+  public create() {
+    this.router.navigate(['/create-message']);
   }
 }
