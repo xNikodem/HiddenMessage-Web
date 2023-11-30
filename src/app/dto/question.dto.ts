@@ -1,11 +1,7 @@
-export class QuestionDto {
+export interface QuestionDto {
   question: string;
+  answer: string;
   type: string;
-  answer: string | number | Date;
+  length: number;
 
-  constructor(question: string, type: string, answer: string | number | Date) {
-    this.question = question;
-    this.type = type;
-    this.answer = answer;
-  }
 }
