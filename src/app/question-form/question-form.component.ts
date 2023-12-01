@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, FormsModule, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {QuestionDto} from "../dto/question.dto";
 import * as FormConst from "../constants/form.const";
 import {SnackbarService} from "../notifications/snackbar.service";
+import {AuthService} from "../service/auth.service";
+import {PuzzleDto} from "../dto/puzzle.dto";
 
 
 @Component({
@@ -18,7 +20,8 @@ export class QuestionFormComponent implements OnInit {
   private questionHistory: QuestionDto[] = [];
 
   constructor(private fb: FormBuilder,
-              private snackbarService: SnackbarService) {
+              private snackbarService: SnackbarService,
+              private authService: AuthService) {
   }
 
   public ngOnInit(): void {
@@ -51,29 +54,76 @@ export class QuestionFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    console.log('Final questions:', this.questionHistory);
-    this.questionNumber = 1;
+    if (this.questionHistory.length > 0) {
+      const puzzle: PuzzleDto = {
+        questions: this.questionHistory
+      };
+
+      console.log(puzzle);
+      this.authService.submitPuzzle(puzzle).subscribe({
+        next: response => {
+          console.log(response);
+        },
+        error: error => {
+          console.error(error);
+        }
+      });
+    } else {
+      this.snackbarService.openSnackbar('No questions to submit', 'Close', 3000);
+    }
   }
 
   public onNextQuestion(): void {
     if (this.isFormValid()) {
       const formValue = this.questionForm.value;
-      const newQuestion = new QuestionDto(formValue.question, formValue.type, this.getCurrentAnswer(formValue));
+      let answer: string = '';
+      let length: number = 0;
+
+      switch (formValue.type) {
+        case FormConst.TYPE_TEXT:
+          answer = formValue.answerText;
+          length = formValue.textMaxLength;
+          break;
+        case FormConst.TYPE_NUMBER:
+          answer = formValue.answerNumber.toString();
+          length = formValue.maxNumber.toString().length;
+          break;
+        case FormConst.TYPE_DATE:
+          answer = formValue.answerDate;
+          break;
+        case FormConst.TYPE_PIN:
+          answer = formValue.pin;
+          length = formValue.pinLength;
+          break;
+      }
+
+      const newQuestion: QuestionDto = {
+        question: formValue.description,
+        answer: answer,
+        type: formValue.type,
+        length: length
+      };
+
       this.questionHistory.push(newQuestion);
 
-      this.questionForm.patchValue({
-        description: '',
-        answerText: '',
-        answerNumber: '',
-        answerDate: '',
-        pin: ''
-      });
-
+      this.resetForm();
       this.onTypeChange();
       this.questionNumber++;
     } else {
       this.snackbarService.openSnackbar('Fill the fields', 'Close', 3000);
     }
+  }
+
+
+  private resetForm(): void {
+    this.questionForm.patchValue({
+      description: '',
+      answerText: '',
+      answerNumber: '',
+      answerDate: '',
+      pin: ''
+    });
+    // Resetowanie innych formularzy, jeśli jest to wymagane
   }
 
   public validateMaxPinLength(): void {

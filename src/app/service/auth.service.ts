@@ -2,19 +2,20 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError, Observable, tap, throwError} from 'rxjs';
 import {UserDto} from "../dto/user.dto";
+import {LOGIN_API, PUZZLE_API, REGISTER_API} from "../constants/api-paths.const";
+import {PuzzleDto} from "../dto/puzzle.dto";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/api/auth';
   private jwtToken: string | null = null;
 
   constructor(private http: HttpClient) {
   }
 
   public register(userDto: UserDto): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userDto, {
+    return this.http.post(REGISTER_API, userDto, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
@@ -22,11 +23,24 @@ export class AuthService {
   }
 
   public login(userDto: UserDto): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, userDto, {responseType: 'text'})
+    return this.http.post(LOGIN_API, userDto, { responseType: 'json' })
       .pipe(
-        tap(token => this.setSession(token)),
+        tap((response: any) => {
+          const token = response.accessToken as string;
+          this.setSession(token);
+        }),
         catchError(error => throwError(() => new Error(error.message)))
       );
+  }
+
+  public submitPuzzle(puzzle: PuzzleDto): Observable<any> {
+    console.log(this.getJwtToken());
+    return this.http.post(PUZZLE_API, puzzle, {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${this.getJwtToken()}`
+      })
+    });
   }
 
   public logout() {
@@ -46,5 +60,9 @@ export class AuthService {
   private setSession(authResult: string) {
     localStorage.setItem('jwt_token', authResult);
     this.jwtToken = authResult;
+  }
+
+  private getJwtToken(): string {
+    return localStorage.getItem('jwt_token') || '';
   }
 }
