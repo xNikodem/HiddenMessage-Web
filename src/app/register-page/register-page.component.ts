@@ -38,11 +38,9 @@ export class RegisterPageComponent implements OnInit {
       };
       this.authService.register(userDto).subscribe(
         response => {
-          console.log(response)
           this.router.navigate(['/main'])
         },
         error => {
-          console.log(error)
           this.errorMessage = error.error
         }
       );
