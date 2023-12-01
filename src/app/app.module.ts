@@ -15,6 +15,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "./security/jwt.interceptor";
 import { MessageFormComponent } from './message-form/message-form.component';
+import { PuzzleSolverComponent } from './puzzle-solver/puzzle-solver.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MessageFormComponent } from './message-form/message-form.component';
     QuestionFormComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    MessageFormComponent
+    MessageFormComponent,
+    PuzzleSolverComponent
   ],
     imports: [
         BrowserModule,

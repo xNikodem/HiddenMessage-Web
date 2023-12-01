@@ -6,6 +6,7 @@ import {LoginPageComponent} from "./login-page/login-page.component";
 import {RegisterPageComponent} from "./register-page/register-page.component";
 import {AuthGuard} from "./security/auth.guard";
 import {MessageFormComponent} from "./message-form/message-form.component";
+import {PuzzleSolverComponent} from "./puzzle-solver/puzzle-solver.component";
 
 const routes: Routes = [
   {path: 'main', component: MainPageComponent, canActivate: [AuthGuard]},
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'create-message', component: QuestionFormComponent, canActivate: [AuthGuard]},
   {path: 'register', component: RegisterPageComponent},
-  {path: 'new-message', component: MessageFormComponent, canActivate: [AuthGuard]}
+  {path: 'new-message', component: MessageFormComponent, canActivate: [AuthGuard]},
+  { path: ':uniqueId', component: PuzzleSolverComponent }
 ];
 
 @NgModule({
