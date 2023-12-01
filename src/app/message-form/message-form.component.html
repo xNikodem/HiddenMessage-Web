@@ -1,0 +1,42 @@
+<div class="container">
+  <form (ngSubmit)="submitMessage()"
+        class="glass-container">
+    <textarea [(ngModel)]="text"
+              cols="50"
+              name="message"
+              rows="10">
+    </textarea>
+
+    <div class="file-section">
+      <span>
+        Add Message from file (.txt only):
+      </span>
+      <div class="file-container">
+        <input #fileInput
+               (change)="onFileSelected($event)"
+               accept=".txt"
+               hidden
+               type="file">
+
+        <button (click)="fileInput.click()"
+                [class.active]="fileSelected"
+                class="choose-file-btn"
+                type="button">
+          Choose File
+        </button>
+
+        <button (click)="loadFileContent()"
+                [class.active]="fileSelected"
+                [title]="fileSelected ? '' : 'Choose file first'"
+                class="accept-btn"
+                type="button">
+          Accept
+        </button>
+      </div>
+    </div>
+
+    <button type="submit">
+      Submit
+    </button>
+  </form>
+</div>

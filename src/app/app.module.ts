@@ -14,6 +14,7 @@ import {MatButtonModule} from "@angular/material/button";
 import { RegisterPageComponent } from './register-page/register-page.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {JwtInterceptor} from "./security/jwt.interceptor";
+import { MessageFormComponent } from './message-form/message-form.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {JwtInterceptor} from "./security/jwt.interceptor";
     MainPageComponent,
     QuestionFormComponent,
     LoginPageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    MessageFormComponent
   ],
     imports: [
         BrowserModule,

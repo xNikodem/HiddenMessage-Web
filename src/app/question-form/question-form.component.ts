@@ -5,6 +5,8 @@ import * as FormConst from "../constants/form.const";
 import {SnackbarService} from "../notifications/snackbar.service";
 import {AuthService} from "../service/auth.service";
 import {PuzzleDto} from "../dto/puzzle.dto";
+import {PuzzleDataService} from "../service/puzzle-data.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -21,7 +23,8 @@ export class QuestionFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private snackbarService: SnackbarService,
-              private authService: AuthService) {
+              private puzzleDataService: PuzzleDataService,
+              private router: Router) {
   }
 
   public ngOnInit(): void {
@@ -56,22 +59,18 @@ export class QuestionFormComponent implements OnInit {
   public onSubmit(): void {
     if (this.questionHistory.length > 0) {
       const puzzle: PuzzleDto = {
-        questions: this.questionHistory
+        questions: this.questionHistory,
+        message:''
       };
 
-      console.log(puzzle);
-      this.authService.submitPuzzle(puzzle).subscribe({
-        next: response => {
-          console.log(response);
-        },
-        error: error => {
-          console.error(error);
-        }
-      });
+      this.puzzleDataService.setPuzzleData(puzzle);
+
+      this.router.navigate(['/new-message']);
     } else {
       this.snackbarService.openSnackbar('No questions to submit', 'Close', 3000);
     }
   }
+
 
   public onNextQuestion(): void {
     if (this.isFormValid()) {
@@ -122,8 +121,7 @@ export class QuestionFormComponent implements OnInit {
       answerNumber: '',
       answerDate: '',
       pin: ''
-    });
-    // Resetowanie innych formularzy, jeśli jest to wymagane
+    })
   }
 
   public validateMaxPinLength(): void {
@@ -185,24 +183,8 @@ export class QuestionFormComponent implements OnInit {
     }
   }
 
-  private getCurrentAnswer(formValue: any): string | number | Date {
-    switch (formValue.type) {
-      case FormConst.TYPE_TEXT:
-        return formValue.answerText;
-      case FormConst.TYPE_NUMBER:
-        return formValue.answerNumber;
-      case FormConst.TYPE_DATE:
-        return formValue.answerDate;
-      case FormConst.TYPE_PIN:
-        return formValue.pin;
-      default:
-        return '';
-    }
-  }
-
   private isFormValid(): boolean {
     const formValue = this.questionForm.value;
-    console.log(this.questionForm.value);
     if (!formValue.description) {
 
       return false;

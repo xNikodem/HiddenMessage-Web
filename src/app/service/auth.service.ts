@@ -34,7 +34,6 @@ export class AuthService {
   }
 
   public submitPuzzle(puzzle: PuzzleDto): Observable<any> {
-    console.log(this.getJwtToken());
     return this.http.post(PUZZLE_API, puzzle, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

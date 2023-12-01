@@ -1,37 +1,35 @@
 @import "_config.scss";
 @import "_mixin-basics.scss";
+@import "../styles/colors";
 
 .glass-container {
-  background: rgba(255, 255, 255, 0.15);
+  background: $color-grey-glass;
   border-radius: $DEFAULT_BORDER_RADIUS;
   backdrop-filter: blur(5px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: $DEFAULT_PAGE_PADDING;
   text-align: center;
-  @include flex(column,center,center);
+  @include flex(column, center, center);
 }
 
 .glass-container h2 {
   margin-top: 0;
-  color: white;
-}
-
-.glass-container  button {
-  background: rgba(0, 0, 0, 0.05);
-  backdrop-filter: blur(15px);
-  border: none;
-  border-radius: $DEFAULT_BORDER_RADIUS_LOWEST;
-  color: white;
-  margin-bottom: $DEFAULT_PAGE_MARGIN_LOWEST;
-  padding: $DEFAULT_PAGE_PADDING_LOWEST;
-  width: 90%;
+  color: $color-text;
 }
 
 .glass-container button {
+  background: $color-secondary;
+  backdrop-filter: blur(15px);
+  border: none;
+  border-radius: $DEFAULT_BORDER_RADIUS_LOWEST;
+  color: $color-text;
+  margin-bottom: $DEFAULT_PAGE_MARGIN_LOWEST;
+  padding: $DEFAULT_PAGE_PADDING_LOWEST;
+  width: 90%;
   cursor: pointer;
   transition: background-color 0.3s;
 
   &:hover {
-    background-color: rgba(0, 140, 255, 0.8);
+    background-color: $color-hover;
   }
 }
