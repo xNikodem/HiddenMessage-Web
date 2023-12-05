@@ -42,7 +42,7 @@ export class AuthService {
     });
   }
 
-  public logout() {
+  public logout():void {
     localStorage.removeItem('jwt_token');
     this.jwtToken = null;
   }
@@ -52,11 +52,11 @@ export class AuthService {
     return !!token && !this.isTokenExpired(token);
   }
 
-  isTokenExpired(token: string): boolean {
+  private isTokenExpired(token: string): boolean {
     return false;
   }
 
-  private setSession(authResult: string) {
+  private setSession(authResult: string):void {
     localStorage.setItem('jwt_token', authResult);
     this.jwtToken = authResult;
   }

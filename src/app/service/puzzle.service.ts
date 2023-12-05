@@ -10,7 +10,7 @@ export class PuzzleService {
 
   constructor(private http: HttpClient) { }
 
-  getPuzzle(uniqueId: string): Observable<any> {
+  public getPuzzle(uniqueId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/${uniqueId}`);
   }
 }

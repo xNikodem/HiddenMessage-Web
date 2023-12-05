@@ -15,7 +15,7 @@ export class PuzzleDataService {
     return this.puzzleData;
   }
 
-  public clearData() {
+  public clearData():void {
     this.puzzleData = null;
   }
 }

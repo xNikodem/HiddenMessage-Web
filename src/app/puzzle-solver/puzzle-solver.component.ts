@@ -18,7 +18,7 @@ export class PuzzleSolverComponent implements OnInit {
     private authservice:AuthService
   ) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.authservice.logout();
     this.route.paramMap.subscribe(params => {
       const id = params.get('uniqueId');
@@ -32,7 +32,7 @@ export class PuzzleSolverComponent implements OnInit {
   }
 
 
-  getPuzzle(): void {
+  private getPuzzle(): void {
     this.puzzleService.getPuzzle(this.uniqueId).subscribe(
       data => {
         this.puzzleData = data;
