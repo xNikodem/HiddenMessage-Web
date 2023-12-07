@@ -16,7 +16,7 @@
 
     label {
       background: none;
-      color: $color-text;
+      color: $COLOR-TEXT;
     }
 
     textarea {
@@ -32,7 +32,7 @@
 
     textarea,
     button {
-      background: $color-secondary;
+      background: $COLOR-SECONDARY;
       backdrop-filter: blur(15px);
       border: none;
       border-radius: $DEFAULT_BORDER_RADIUS_LOWEST;
@@ -43,7 +43,7 @@
 
     .file-section {
       span {
-        color: $color-text;
+        color: $COLOR-TEXT;
         font-size: $FONT_SIZE_DEFAULT;
       }
 
@@ -57,41 +57,41 @@
           transition: background-color 0.3s;
           padding: $DEFAULT_PAGE_PADDING_LOWEST;
           min-width: 10rem;
-          color: $color-text;
+          color: $COLOR-TEXT;
         }
 
         .choose-file-btn {
-          background-color: $color-primary;
+          background-color: $COLOR-PRIMARY;
 
           &:hover {
             background-color: darken(#007bff, 10%);
           }
 
           &.active {
-            background: $color-secondary;
+            background: $COLOR-SECONDARY;
             cursor: pointer;
             transition: background-color 0.3s;
 
             &:hover {
-              background-color: $color-hover;
+              background-color: $COLOR-HOVER;
             }
           }
         }
 
         .accept-btn {
-          background: $color-secondary;
+          background: $COLOR-SECONDARY;
 
           &:hover {
             cursor: not-allowed;
           }
 
           &.active {
-            background-color: $color-primary;
-            color: $color-text;
+            background-color: $COLOR-PRIMARY;
+            color: $COLOR-TEXT;
             cursor: pointer;
 
             &:hover {
-              background-color: $color-primary-dark;
+              background-color: $COLOR-PRIMARY-DARK;
             }
           }
         }
@@ -103,7 +103,7 @@
       transition: background-color 0.3s;
 
       &:hover {
-        background-color: $color-hover;
+        background-color: $COLOR-HOVER;
       }
     }
   }

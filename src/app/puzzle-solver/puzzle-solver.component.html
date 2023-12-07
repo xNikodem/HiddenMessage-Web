@@ -1,4 +1,33 @@
-<div *ngIf="puzzleData">
-  <h1>Puzzle Details</h1>
-  <p>msg: {{ puzzleData.message }}</p>
+<div class="container">
+  <div *ngIf="currentQuestion" class="glass-container">
+    <h2>Answer the question:</h2>
+    <h3>{{ currentQuestion.question }}</h3>
+
+    <!-- For text input -->
+    <input *ngIf="currentQuestion.type === 'text'" [(ngModel)]="userAnswer"
+           type="text" [maxLength]="currentQuestion.length"
+           class="answer-input" placeholder="Your answer">
+
+    <!-- For number input -->
+    <input *ngIf="currentQuestion.type === 'number'" type="number" [(ngModel)]="userAnswer"
+           [max]="currentQuestion.length" (input)="validateNumberInput($event, currentQuestion.length)">
+
+    <!-- For date input -->
+    <input *ngIf="currentQuestion.type === 'date'" [(ngModel)]="userAnswer"
+           type="date" class="answer-input" placeholder="Your answer">
+
+    <!-- For PIN input -->
+    <div *ngIf="currentQuestion.type === 'pin'">
+      <div *ngFor="let item of pins; let i = index">
+        <input type="text" (keyup)="handlePinInput($event, i)" [attr.data-id]="i" maxlength="1">
+      </div>
+    </div>
+
+
+    <button (click)="submitAnswer()" class="submit-btn">Send Answer</button>
+  </div>
+
+  <div *ngIf="!currentQuestion" class="no-question">
+    <p>Loading Question...</p>
+  </div>
 </div>

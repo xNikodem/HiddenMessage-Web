@@ -85,7 +85,7 @@ export class QuestionFormComponent implements OnInit {
           break;
         case FormConst.TYPE_NUMBER:
           answer = formValue.answerNumber.toString();
-          length = formValue.maxNumber.toString().length;
+          length = formValue.maxNumber.toString();
           break;
         case FormConst.TYPE_DATE:
           answer = formValue.answerDate;
@@ -203,4 +203,5 @@ export class QuestionFormComponent implements OnInit {
         return true;
     }
   }
+
 }
