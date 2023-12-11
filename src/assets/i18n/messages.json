@@ -1,0 +1,67 @@
+{
+  "loginPage": {
+    "usernameLabel": "Username",
+    "passwordLabel": "Password",
+    "signInButton": "Sign In",
+    "signUpButton": "Sign Up",
+    "invalidCredentials": "Invalid username or password."
+  },
+  "messageForm": {
+    "addFromFileText": "Add Message from file (.txt only):",
+    "chooseFile": "Choose file",
+    "acceptFile": "Accept",
+    "submit": "Submit",
+    "noPuzzleError": "No puzzle data found",
+    "linkLabel": "Link to your hidden message:",
+    "copyLink": "Copy link",
+    "copyError": "Failed to copy link",
+    "copySuccess": "Copied!"
+  },
+  "main": {
+    "createH2": "Create Hidden Message",
+    "createButton": "Create"
+  },
+  "puzzle": {
+    "questionH2": "Answer the question:",
+    "submit": "Send Answer",
+    "wrongAnswer": "Wrong Answer",
+    "submitAnswerError": "Error submitting answer",
+    "loadQuestionError": "Error fetching next question",
+    "loadMessageError": "Error fetching message"
+  },
+  "questionForm": {
+    "questionNumber": "Question number ",
+    "question": "Question:",
+    "answerType": "Answer type:",
+    "option": {
+      "text": "Text",
+      "number": "Number",
+      "pin": "PIN",
+      "date": "Date"
+    },
+    "answer": {
+      "text": "Text answer:",
+      "number": "Number answer:",
+      "pin": "PIN answer:",
+      "date": "Date answer:"
+    },
+    "maxValue": {
+      "text": "Max text length:",
+      "number": "Max number:",
+      "pin": "Number of Digits in PIN (3-8):"
+    },
+    "nextQuestion": "Next Question",
+    "submit": "Submit",
+    "emptyFields": "Fill all fields",
+    "emptyForm": "No questions to submit"
+  },
+  "registerPage": {
+    "usernameLabel": "Username",
+    "passwordLabel": "Password",
+    "confirmPasswordLabel": "Confirm Password",
+    "registerButton": "Register",
+    "usernameRequired": "Username is required.",
+    "passwordRequired": "Password is required.",
+    "passwordsMustMatch": "Passwords must match."
+  }
+}

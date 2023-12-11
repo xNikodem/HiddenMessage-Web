@@ -2,110 +2,119 @@
 @import "../styles/mixin-basics";
 @import "../styles/colors";
 
-.container {
-  @include flex(column, center, center);
-  background: url('/assets/imgs/spaceBackground.png') no-repeat center center fixed;
-  background-size: cover;
-  min-height: 100vh;
 
-  .glass-container {
-    @include width-height(auto, auto);
-    @include flex(column, center, center);
-    padding: $DEFAULT_PAGE_PADDING;
-    gap: $DEFAULT_GAP;
+.glass-container {
 
-    label {
-      background: none;
-      color: $color-text;
+  label {
+    background: none;
+    color: $COLOR-TEXT;
+  }
+
+  textarea {
+    @include width-height(90%, 50vh);
+    max-height: 30rem;
+    font-size: $FONT_SIZE_SLIGHTLY_SMALLER;
+    resize: none;
+
+    @media (max-width: 480px) {
+      font-size: $FONT_SIZE_PAGE_TITLE_SMALLER;
+    }
+  }
+
+  textarea,
+  button {
+    background: $COLOR-SECONDARY;
+    backdrop-filter: blur(15px);
+    border: none;
+    border-radius: $DEFAULT_BORDER_RADIUS_LOWEST;
+    color: $COLOR-TEXT;
+    margin-bottom: $DEFAULT_PAGE_MARGIN_LOWEST;
+    padding: $DEFAULT_PAGE_PADDING_LOWEST;
+  }
+
+  .file-section {
+    span {
+      color: $COLOR-TEXT;
+      font-size: $FONT_SIZE_DEFAULT;
     }
 
-    textarea {
-      @include width-height(90%, 50vh);
-      max-height: 30rem;
-      font-size: $FONT_SIZE_SLIGHTLY_SMALLER;
-      resize: none;
+    .file-container {
+      @include flex(row, center, center);
+      gap: $DEFAULT_GAP_GREATER;
+      margin-top: $DEFAULT_PAGE_MARGIN_LOWER;
 
-      @media (max-width: 480px) {
-        font-size: $FONT_SIZE_PAGE_TITLE_SMALLER;
+      .choose-file-btn,
+      .accept-btn {
+        transition: background-color 0.3s;
+        padding: $DEFAULT_PAGE_PADDING_LOWEST;
+        min-width: 10rem;
+        color: $COLOR-TEXT;
       }
-    }
 
-    textarea,
-    button {
-      background: $color-secondary;
-      backdrop-filter: blur(15px);
-      border: none;
-      border-radius: $DEFAULT_BORDER_RADIUS_LOWEST;
-      color: white;
-      margin-bottom: $DEFAULT_PAGE_MARGIN_LOWEST;
-      padding: $DEFAULT_PAGE_PADDING_LOWEST;
-    }
+      .choose-file-btn {
+        background-color: $COLOR-PRIMARY;
 
-    .file-section {
-      span {
-        color: $color-text;
-        font-size: $FONT_SIZE_DEFAULT;
-      }
+        &:hover {
+          background-color: $COLOR-PRIMARY-DARK;
+        }
 
-      .file-container {
-        @include flex(row, center, center);
-        gap: $DEFAULT_GAP_GREATER;
-        margin-top: $DEFAULT_PAGE_MARGIN_LOWER;
-
-        .choose-file-btn,
-        .accept-btn {
+        &.active {
+          background: $COLOR-SECONDARY;
+          cursor: pointer;
           transition: background-color 0.3s;
-          padding: $DEFAULT_PAGE_PADDING_LOWEST;
-          min-width: 10rem;
-          color: $color-text;
-        }
-
-        .choose-file-btn {
-          background-color: $color-primary;
 
           &:hover {
-            background-color: darken(#007bff, 10%);
-          }
-
-          &.active {
-            background: $color-secondary;
-            cursor: pointer;
-            transition: background-color 0.3s;
-
-            &:hover {
-              background-color: $color-hover;
-            }
-          }
-        }
-
-        .accept-btn {
-          background: $color-secondary;
-
-          &:hover {
-            cursor: not-allowed;
-          }
-
-          &.active {
-            background-color: $color-primary;
-            color: $color-text;
-            cursor: pointer;
-
-            &:hover {
-              background-color: $color-primary-dark;
-            }
+            background-color: $COLOR-HOVER;
           }
         }
       }
-    }
 
-    button {
-      cursor: pointer;
-      transition: background-color 0.3s;
+      .accept-btn {
+        background: $COLOR-SECONDARY;
 
-      &:hover {
-        background-color: $color-hover;
+        &:hover {
+          cursor: not-allowed;
+        }
+
+        &.active {
+          background-color: $COLOR-PRIMARY;
+          color: $COLOR-TEXT;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $COLOR-PRIMARY-DARK;
+          }
+        }
       }
     }
   }
 
+  .message-link-container {
+    @include flex(column, center, center);
+
+    a {
+      background: $COLOR-SECONDARY;
+      backdrop-filter: blur(15px);
+      border: none;
+      border-radius: $DEFAULT_BORDER_RADIUS_LOWEST;
+      color: $COLOR-TEXT;
+      margin-bottom: $DEFAULT_PAGE_MARGIN;
+      padding: $DEFAULT_PAGE_PADDING_LOWEST;
+      transition: color 0.3s;
+
+      &:hover {
+        color: $COLOR-HOVER;
+      }
+    }
+  }
+
+  button {
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $COLOR-HOVER;
+    }
+  }
 }
+

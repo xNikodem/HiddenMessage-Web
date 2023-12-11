@@ -1,0 +1,10 @@
+{
+  "routes": {
+    "main": "main",
+    "register": "register",
+    "createPuzzle": "create-message",
+    "createMessage": "new-message",
+    "login": "login",
+    "uniqueId": "uniqueId"
+  }
+}

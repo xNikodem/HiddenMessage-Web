@@ -1,0 +1,54 @@
+<div *ngIf="!puzzleCompleted"
+     class="container">
+  <div *ngIf="currentQuestion" class="glass-container">
+    <h2>
+      {{labels.questionH2}}
+    </h2>
+
+    <h3>
+      {{ currentQuestion.question }}
+    </h3>
+
+    <input *ngIf="currentQuestion.type === 'text'"
+           [(ngModel)]="userAnswer"
+           [maxLength]="currentQuestion.length"
+           class="answer-input"
+           placeholder="Your answer"
+           type="text">
+
+    <input (input)="validateNumberInput($event, currentQuestion.length)"
+           *ngIf="currentQuestion.type === 'number'"
+           [(ngModel)]="userAnswer"
+           [max]="currentQuestion.length" type="number">
+
+    <input *ngIf="currentQuestion.type === 'date'"
+           [(ngModel)]="userAnswer"
+           class="answer-input"
+           placeholder="Your answer"
+           type="date">
+
+    <div *ngIf="currentQuestion.type === 'pin'"
+         class="pin-container">
+      <div *ngFor="let item of pins; let i = index">
+        <input (keyup)="handlePinInput($event, i)"
+               [attr.data-id]="i"
+               [ngClass]="{'filled-input': pinAnswer[i] != null||''}"
+               maxlength="1" type="text">
+      </div>
+    </div>
+
+    <button (click)="submitAnswer()"
+            class="submit-btn">
+      {{labels.submit}}
+    </button>
+  </div>
+</div>
+
+<div *ngIf="puzzleCompleted">
+  <app-interactive-background></app-interactive-background>
+
+  <div [ngClass]="{'glass-container-completed': puzzleCompleted}"
+       class="glass-container">
+    {{hiddenMessage}}
+  </div>
+</div>

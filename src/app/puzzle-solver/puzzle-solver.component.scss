@@ -2,25 +2,12 @@
 @import "../styles/mixin-basics";
 @import "../styles/colors";
 
-
 .glass-container {
 
   label {
     background: none;
-    color: $COLOR-TEXT;
   }
 
-
-  textarea {
-    height: 4rem;
-    font-size: $FONT_SIZE_SLIGHTLY_SMALLER;
-    max-width: 20rem;
-    max-height: 10rem;
-    min-width: 20rem;
-    min-height: 10rem;
-  }
-
-  textarea,
   input,
   select,
   button {
@@ -39,14 +26,21 @@
     font-size: $FONT_SIZE_DEFAULT;
   }
 
-  option {
-    color: $COLOR-OPTION;
-  }
+  .pin-container {
+    @include flex(row, center, center);
+    gap: $DEFAULT_GAP_SMALLER;
 
-  .input-group {
-    @include flex(column, center, center);
-    margin-bottom: $DEFAULT_PAGE_MARGIN_LOWER;
-    min-width: 8rem;
+    .filled-input {
+      border: 2px solid $COLOR-HOVER;
+    }
+
+    input {
+      text-align: center;
+      font-size: $FONT_SIZE_LARGER;
+      width: 2rem;
+      height: 2rem;
+      border: 2px solid transparent;
+    }
   }
 
   button {
@@ -64,5 +58,14 @@
     width: 90%;
     gap: $DEFAULT_GAP_GREATER;
   }
+}
+.glass-container-completed {
+  overflow: auto;
+  max-height: 80%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 

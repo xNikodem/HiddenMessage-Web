@@ -3,5 +3,4 @@ export interface QuestionDto {
   answer: string;
   type: string;
   length: number;
-
 }

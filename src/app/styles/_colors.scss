@@ -1,8 +1,11 @@
-$color-primary: #007bff;
-$color-primary-dark: darken($color-primary, 10%);
-$color-primary-darker: darken($color-primary, 20%);
-$color-secondary: rgba(0, 0, 0, 0.05);
-$color-text: white;
-$color-disabled: #ccc;
-$color-hover: rgba(0, 140, 255, 0.8);
-$color-grey-glass: rgba(255, 255, 255, 0.15);
+$COLOR-PRIMARY: #007bff;
+$COLOR-PRIMARY-DARK: darken($COLOR-PRIMARY, 10%);
+$COLOR-PRIMARY-DARKER: darken($COLOR-PRIMARY, 20%);
+$COLOR-SECONDARY: rgba(0, 0, 0, 0.05);
+$COLOR-TEXT: white;
+$COLOR-DISABLED: #ccc;
+$COLOR-HOVER: rgba(0, 140, 255, 0.8);
+$COLOR-GREY-GLASS: rgba(255, 255, 255, 0.15);
+$COLOR-OPTION: black;
+$COLOR-SCROLL-UNACTIVE: rgba(0,0,0,0.2);
+$COLOR_SCROLL-ACTIVE: rgba(0,0,0,0.3)
