@@ -1,42 +1,60 @@
 <div class="container">
-  <form (ngSubmit)="submitMessage()"
-        class="glass-container">
+  <div class="glass-container">
+    <form (ngSubmit)="submitMessage()"
+          *ngIf="!puzzleLink">
+
     <textarea [(ngModel)]="text"
               cols="50"
               name="message"
               rows="10">
     </textarea>
 
-    <div class="file-section">
+      <div class="file-section">
       <span>
         {{labels.addFromFileText}}
       </span>
-      <div class="file-container">
-        <input #fileInput
-               (change)="onFileSelected($event)"
-               accept=".txt"
-               hidden
-               type="file">
+        <div class="file-container">
+          <input #fileInput
+                 (change)="onFileSelected($event)"
+                 accept=".txt"
+                 hidden
+                 type="file">
 
-        <button (click)="fileInput.click()"
-                [class.active]="fileSelected"
-                class="choose-file-btn"
-                type="button">
-          {{labels.chooseFile}}
-        </button>
+          <button (click)="fileInput.click()"
+                  [class.active]="fileSelected"
+                  class="choose-file-btn"
+                  type="button">
+            {{labels.chooseFile}}
+          </button>
 
-        <button (click)="loadFileContent()"
-                [class.active]="fileSelected"
-                [title]="fileSelected ? '' : 'Choose file first'"
-                class="accept-btn"
-                type="button">
-          {{labels.acceptFile}}
-        </button>
+          <button (click)="loadFileContent()"
+                  [class.active]="fileSelected"
+                  [title]="fileSelected ? '' : 'Choose file first'"
+                  class="accept-btn"
+                  type="button">
+            {{labels.acceptFile}}
+          </button>
+        </div>
       </div>
-    </div>
 
-    <button type="submit">
-      {{labels.submit}}
-    </button>
-  </form>
+      <button type="submit">
+        {{labels.submit}}
+      </button>
+    </form>
+
+    <div *ngIf="puzzleLink"
+         class="message-link-container">
+      <h2>
+        {{labels.linkLabel}}
+      </h2>
+
+      <a href="{{ puzzleLink }}"
+         target="_blank">
+        {{ puzzleLink }}
+      </a>
+      <button (click)="copyLinkToClipboard()">
+        {{labels.copyLink}}
+      </button>
+    </div>
+  </div>
 </div>

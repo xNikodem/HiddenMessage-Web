@@ -28,11 +28,13 @@ export class PuzzleService {
     return this.http.get(`${PUZZLE_API}/${uniqueUrl}/message`, { responseType: 'text' });
   }
 
-  public submitPuzzle(puzzle: PuzzleDto): Observable<any> {
-    return this.http.post(PUZZLE_API, puzzle, {
-      headers: this.getHeaders()
+  public submitPuzzle(puzzle: PuzzleDto): Observable<string> {
+    return this.http.post<string>(PUZZLE_API, puzzle, {
+      headers: this.getHeaders(),
+      responseType: 'text' as 'json'
     });
   }
+
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({

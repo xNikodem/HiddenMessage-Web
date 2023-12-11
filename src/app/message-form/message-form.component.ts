@@ -1,7 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
 import {PuzzleDataService} from "../service/puzzle/puzzle-data.service";
-import {AuthService} from "../service/auth/auth.service";
-import {HttpClient} from "@angular/common/http";
 import {SnackbarService} from "../notifications/snackbar.service";
 import labelsData from '../../assets/i18n/messages.json';
 import routesData from '../../assets/paths.json';
@@ -20,10 +18,11 @@ export class MessageFormComponent {
   public labels = labelsData.messageForm;
   private routes = routesData.routes;
   private fileType: string = "text/plain";
+  public puzzleLink: string | null = null;
 
   constructor(private puzzleDataService: PuzzleDataService,
               private snackbar: SnackbarService,
-              private puzzleService:PuzzleService) {
+              private puzzleService: PuzzleService) {
   }
 
   public onFileSelected(event: any): void {
@@ -50,8 +49,9 @@ export class MessageFormComponent {
       puzzleData.message = this.text;
 
       this.puzzleService.submitPuzzle(puzzleData).subscribe({
-        next: response => {
+        next: uniqueId => {
           this.puzzleDataService.clearData();
+          this.puzzleLink = `${window.location.origin}/${uniqueId}`;
         },
         error: error => {
           console.error(error);
@@ -59,6 +59,15 @@ export class MessageFormComponent {
       });
     } else {
       this.snackbar.snackbarRedirect(this.labels.noPuzzleError, '/'+this.routes.main);
+    }
+  }
+  public copyLinkToClipboard(): void {
+    if (this.puzzleLink) {
+      navigator.clipboard.writeText(this.puzzleLink).then(() => {
+        this.snackbar.openSnackbar(this.labels.copySuccess);
+      }).catch(err => {
+        this.snackbar.openSnackbar(this.labels.copyError);
+      });
     }
   }
 }

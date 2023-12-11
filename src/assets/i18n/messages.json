@@ -11,7 +11,11 @@
     "chooseFile": "Choose file",
     "acceptFile": "Accept",
     "submit": "Submit",
-    "noPuzzleError": "No puzzle data found"
+    "noPuzzleError": "No puzzle data found",
+    "linkLabel": "Link to your hidden message:",
+    "copyLink": "Copy link",
+    "copyError": "Failed to copy link",
+    "copySuccess": "Copied!"
   },
   "main": {
     "createH2": "Create Hidden Message",
