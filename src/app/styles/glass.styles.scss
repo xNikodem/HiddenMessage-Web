@@ -3,13 +3,19 @@
 @import "../styles/colors";
 
 .glass-container {
+  @include flex(column, center, center);
+  @include width-height(30rem, auto);
+  @include configured-absolute-pos(50%, 50%);
   background: $COLOR-GREY-GLASS;
   border-radius: $DEFAULT_BORDER_RADIUS;
   backdrop-filter: blur(5px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: $DEFAULT_PAGE_PADDING;
   text-align: center;
-  @include flex(column, center, center);
+  gap: $DEFAULT_GAP;
+  color: $COLOR-TEXT;
+  position: absolute;
+  transform: translate(-50%, -50%);
 }
 
 .glass-container h2 {

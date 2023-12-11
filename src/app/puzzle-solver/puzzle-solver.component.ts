@@ -17,9 +17,11 @@ export class PuzzleSolverComponent implements OnInit {
   public pins: string[] = [];
   public pinAnswer: string[] = [];
   public labels = labelsData.puzzle;
+  public puzzleCompleted!: boolean;
+  public hiddenMessage = '';
   private uniqueId!: string;
   private correctAnswersCount!: number;
-  private readonly UNIQUEID_KEY='uniqueId'
+  private readonly UNIQUEID_KEY = 'uniqueId'
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +32,7 @@ export class PuzzleSolverComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.puzzleCompleted = false;
     this.correctAnswersCount = 0;
     this.authService.logout();
     this.route.paramMap.subscribe(params => {
@@ -73,12 +76,12 @@ export class PuzzleSolverComponent implements OnInit {
     this.puzzleService.getPuzzle(this.uniqueId, this.correctAnswersCount).subscribe(
       question => {
         this.currentQuestion = question;
-        if (this.currentQuestion.type === TYPE_PIN) {
+        if (this.currentQuestion.type === 'pin') {
           this.pins = new Array(this.currentQuestion.length).fill('');
         }
       },
       error => {
-        if (error.status === 404) {
+        if (error.status === 303) {
           this.loadPuzzleMessage();
         } else {
           this.snackbarService.openSnackbar(this.labels.loadQuestionError)
@@ -106,7 +109,9 @@ export class PuzzleSolverComponent implements OnInit {
   private loadPuzzleMessage(): void {
     this.puzzleService.getPuzzleMessage(this.uniqueId).subscribe(
       message => {
-        console.log(message)
+        this.puzzleCompleted = true;
+        this.hiddenMessage=message;
+        console.log(message);
       },
       error => {
         this.snackbarService.openSnackbar(this.labels.loadMessageError);

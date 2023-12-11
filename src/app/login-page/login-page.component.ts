@@ -33,17 +33,17 @@ export class LoginPageComponent implements OnInit {
     this.loginError = null;
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value).subscribe(
-        response => {
-          this.router.navigate(['/'+this.routes.main]);
+        () => {
+          this.router.navigate(['/' + this.routes.main]);
         },
-        error => {
+        () => {
           this.loginError = this.labels.invalidCredentials;
         }
       );
     }
   }
 
-  public navigateToRegister() {
-    this.router.navigate(['/'+this.routes.register]);
+  public navigateToRegister(): void {
+    this.router.navigate(['/' + this.routes.register]);
   }
 }

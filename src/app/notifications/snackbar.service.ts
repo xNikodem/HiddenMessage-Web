@@ -14,7 +14,7 @@ export class SnackbarService {
               private router: Router) {
   }
 
-  public snackbarRedirect(message: string, route: string, action: string = this.redirectAction) {
+  public snackbarRedirect(message: string, route: string, action: string = this.redirectAction): void {
     const snackbarRef = this.snackBar.open(message, action);
     snackbarRef.onAction().subscribe(() => {
       this.router.navigate([route]);

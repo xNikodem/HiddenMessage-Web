@@ -1,4 +1,5 @@
-<div class="container">
+<div *ngIf="!puzzleCompleted"
+     class="container">
   <div *ngIf="currentQuestion" class="glass-container">
     <h2>
       {{labels.questionH2}}
@@ -41,11 +42,13 @@
       {{labels.submit}}
     </button>
   </div>
+</div>
 
-  <div *ngIf="!currentQuestion"
-       class="no-question">
-    <p>
-      Loading Question...
-    </p>
+<div *ngIf="puzzleCompleted">
+  <app-interactive-background></app-interactive-background>
+
+  <div [ngClass]="{'glass-container-completed': puzzleCompleted}"
+       class="glass-container">
+    {{hiddenMessage}}
   </div>
 </div>

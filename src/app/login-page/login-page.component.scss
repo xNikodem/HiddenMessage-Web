@@ -2,18 +2,6 @@
 @import "../styles/mixin-basics";
 
 .glass-container {
-  @include configured-absolute-pos(50%, 50%);
-  transform: translate(-50%, -50%);
-  @include flex(column, center, center);
-  width: 30rem;
-  max-width: 80%;
-  padding: $DEFAULT_PAGE_PADDING;
-  gap: $DEFAULT_GAP;
-  border-radius: $DEFAULT_BORDER_RADIUS;
-  background: $COLOR-GREY-GLASS;
-  backdrop-filter: blur(10px);
-  color: $COLOR-TEXT;
-  font-size: $FONT_SIZE_DEFAULT;
 
   .form-group {
     @include flex(column, center, center);

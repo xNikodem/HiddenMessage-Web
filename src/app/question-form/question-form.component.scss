@@ -2,77 +2,67 @@
 @import "../styles/mixin-basics";
 @import "../styles/colors";
 
-.container {
-  @include  flex(column,center,center);
-  background: url('/assets/imgs/spaceBackground.png') no-repeat center center fixed;
-  background-size: cover;
-  min-height: 100vh;
 
-  .glass-container {
-    @include width-height(30rem, auto);
-    @include  flex(column,center,center);
-    padding: $DEFAULT_PAGE_PADDING;
-    gap: $DEFAULT_GAP;
+.glass-container {
 
-    label {
-      background: none;
-      color: $COLOR-TEXT;
+  label {
+    background: none;
+    color: $COLOR-TEXT;
+  }
+
+
+  textarea {
+    height: 4rem;
+    font-size: $FONT_SIZE_SLIGHTLY_SMALLER;
+    max-width: 20rem;
+    max-height: 10rem;
+    min-width: 20rem;
+    min-height: 10rem;
+  }
+
+  textarea,
+  input,
+  select,
+  button {
+    background: $COLOR-SECONDARY;
+    backdrop-filter: blur(15px);
+    border: none;
+    border-radius: $DEFAULT_BORDER_RADIUS_LOWEST;
+    color: $COLOR-TEXT;
+    margin-bottom: $DEFAULT_PAGE_MARGIN_LOWEST;
+    padding: $DEFAULT_PAGE_PADDING_LOWEST;
+    width: 90%;
+  }
+
+  input,
+  select {
+    font-size: $FONT_SIZE_DEFAULT;
+  }
+
+  option {
+    color: $COLOR-OPTION;
+  }
+
+  .input-group {
+    @include flex(column, center, center);
+    margin-bottom: $DEFAULT_PAGE_MARGIN_LOWER;
+    min-width: 8rem;
+  }
+
+  button {
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $COLOR-HOVER;
     }
+  }
 
-
-    textarea {
-      height: 4rem;
-      font-size: $FONT_SIZE_SLIGHTLY_SMALLER;
-      max-width: 20rem;
-      max-height: 10rem;
-      min-width: 20rem;
-      min-height: 10rem;
-    }
-
-    textarea,
-    input,
-    select,
-    button {
-      background: $COLOR-SECONDARY;
-      backdrop-filter: blur(15px);
-      border: none;
-      border-radius: $DEFAULT_BORDER_RADIUS_LOWEST;
-      color: $COLOR-TEXT;
-      margin-bottom: $DEFAULT_PAGE_MARGIN_LOWEST;
-      padding: $DEFAULT_PAGE_PADDING_LOWEST;
-      width: 90%;
-    }
-
-    input,
-    select {
-      font-size: $FONT_SIZE_DEFAULT;
-    }
-
-    option {
-      color: $COLOR-OPTION;
-    }
-
-    .input-group {
-      @include  flex(column,center,center);
-      margin-bottom: $DEFAULT_PAGE_MARGIN_LOWER;
-      min-width: 8rem;
-    }
-
-    button {
-      cursor: pointer;
-      transition: background-color 0.3s;
-
-      &:hover {
-        background-color: $COLOR-HOVER;
-      }
-    }
-
-    .navigation-buttons {
-      display: flex;
-      justify-content: space-between;
-      width: 90%;
-      gap: $DEFAULT_GAP_GREATER;
-    }
+  .navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    gap: $DEFAULT_GAP_GREATER;
   }
 }
 

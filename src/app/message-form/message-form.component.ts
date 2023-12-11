@@ -16,9 +16,9 @@ export class MessageFormComponent {
   @ViewChild('fileInput')
   public fileInput: any;
   public labels = labelsData.messageForm;
-  private routes = routesData.routes;
-  private fileType: string = "text/plain";
   public puzzleLink: string | null = null;
+  private routes = routesData.routes;
+  private readonly FILE_TYPE: string = "text/plain";
 
   constructor(private puzzleDataService: PuzzleDataService,
               private snackbar: SnackbarService,
@@ -27,14 +27,14 @@ export class MessageFormComponent {
 
   public onFileSelected(event: any): void {
     const file = event.target.files[0];
-    if (file && file.type === this.fileType) {
+    if (file && file.type === this.FILE_TYPE) {
       this.fileSelected = true;
     }
   }
 
   public loadFileContent(): void {
     const file = this.fileInput.nativeElement.files[0];
-    if (file && file.type === this.fileType) {
+    if (file && file.type === this.FILE_TYPE) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.text = e.target.result;
@@ -58,14 +58,15 @@ export class MessageFormComponent {
         }
       });
     } else {
-      this.snackbar.snackbarRedirect(this.labels.noPuzzleError, '/'+this.routes.main);
+      this.snackbar.snackbarRedirect(this.labels.noPuzzleError, '/' + this.routes.main);
     }
   }
+
   public copyLinkToClipboard(): void {
     if (this.puzzleLink) {
       navigator.clipboard.writeText(this.puzzleLink).then(() => {
         this.snackbar.openSnackbar(this.labels.copySuccess);
-      }).catch(err => {
+      }).catch(() => {
         this.snackbar.openSnackbar(this.labels.copyError);
       });
     }

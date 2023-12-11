@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
 import labelsData from '../../assets/i18n/messages.json';
 import routesData from '../../assets/paths.json';
 
@@ -17,7 +16,7 @@ export class MainPageComponent {
   }
 
   public create(): void {
-    this.router.navigate(['/'+this.routes.createPuzzle]);
+    this.router.navigate(['/' + this.routes.createPuzzle]);
   }
 
 }
