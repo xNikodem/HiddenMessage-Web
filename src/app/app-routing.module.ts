@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: routesData.routes.createPuzzle, component: QuestionFormComponent, canActivate: [AuthGuard]},
   {path: routesData.routes.register, component: RegisterPageComponent},
   {path: routesData.routes.createMessage, component: MessageFormComponent, canActivate: [AuthGuard]},
-  {path: routesData.routes.uniqueId, component: PuzzleSolverComponent }
+  {path: ':'+routesData.routes.uniqueId, component: PuzzleSolverComponent }
 ];
 
 @NgModule({
