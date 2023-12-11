@@ -1,10 +1,15 @@
 <div class="container">
-  <form (ngSubmit)="onSubmit()" [formGroup]="questionForm" class="glass-container">
-    <h2>Question number {{ questionNumber }}</h2>
+  <form (ngSubmit)="onSubmit()"
+        [formGroup]="questionForm"
+        class="glass-container">
+    <h2>
+      {{labels.questionNumber}}
+      {{ questionNumber }}
+    </h2>
 
     <div class="input-group">
       <label for="description">
-        Question:
+        {{labels.question}}
       </label>
 
       <textarea formControlName="description"
@@ -14,25 +19,25 @@
 
     <div class="input-group">
       <label for="type">
-        Answer type:
+        {{labels.answerType}}
       </label>
       <select (change)="onTypeChange()"
               formControlName="type"
               id="type">
         <option value="text">
-          Text
+          {{labels.option.text}}
         </option>
 
         <option value="number">
-          Number
+          {{labels.option.number}}
         </option>
 
         <option value="date">
-          Date
+          {{labels.option.date}}
         </option>
 
         <option value="pin">
-          PIN
+          {{labels.option.pin}}
         </option>
       </select>
     </div>
@@ -40,7 +45,7 @@
     <div *ngIf="selectedType === 'text'"
          class="input-group">
       <label for="answerText">
-        Text Answer:
+        {{labels.answer.text}}
       </label>
 
       <input [maxlength]="questionForm.get('textMaxLength')?.value"
@@ -49,7 +54,7 @@
              type="text">
 
       <label for="textMaxLength">
-        Max Text Length:
+        {{labels.maxValue.text}}
       </label>
 
       <input formControlName="textMaxLength"
@@ -60,8 +65,9 @@
     <div *ngIf="selectedType === 'number'"
          class="input-group">
       <label for="answerNumber">
-        Number Answer:
+        {{labels.answer.number}}
       </label>
+
       <input (blur)="validateMaxNumber()"
              [max]="questionForm.get('maxNumber')?.value"
              formControlName="answerNumber"
@@ -69,8 +75,9 @@
              type="number">
 
       <label for="maxNumber">
-        Max Number Value:
+        {{labels.maxValue.number}}
       </label>
+
       <input formControlName="maxNumber"
              id="maxNumber" min="1"
              type="number">
@@ -79,8 +86,9 @@
     <div *ngIf="selectedType === 'date'"
          class="input-group">
       <label for="answerDate">
-        Date Answer:
+        {{labels.answer.date}}
       </label>
+
       <input formControlName="answerDate"
              id="answerDate"
              type="date">
@@ -89,8 +97,9 @@
     <div *ngIf="selectedType === 'pin'"
          class="input-group">
       <label for="pin">
-        PIN:
+        {{labels.answer.pin}}
       </label>
+
       <input (input)="filterPinInput($event)"
              [maxlength]="questionForm.get('pinLength')?.value"
              [pattern]="pinPattern"
@@ -98,8 +107,9 @@
              type="text">
 
       <label for="pinLength">
-        Number of Digits in PIN (3-8):
+        {{labels.maxValue.pin}}
       </label>
+
       <input (blur)="validateMaxPinLength()"
              (change)="validateMaxPinLength()"
              formControlName="pinLength"
@@ -111,11 +121,11 @@
 
     <div class="navigation-buttons">
       <button (click)="onNextQuestion()" type="button">
-        Next Question
+        {{labels.nextQuestion}}
       </button>
 
       <button type="submit">
-        Submit
+        {{labels.submit}}
       </button>
     </div>
   </form>

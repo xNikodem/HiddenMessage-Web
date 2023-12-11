@@ -3,10 +3,11 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {QuestionDto} from "../dto/question.dto";
 import * as FormConst from "../constants/form.const";
 import {SnackbarService} from "../notifications/snackbar.service";
-import {AuthService} from "../service/auth.service";
 import {PuzzleDto} from "../dto/puzzle.dto";
-import {PuzzleDataService} from "../service/puzzle-data.service";
+import {PuzzleDataService} from "../service/puzzle/puzzle-data.service";
 import {Router} from "@angular/router";
+import labelsData from "../../assets/i18n/messages.json";
+import routesData from "../../assets/paths.json";
 
 
 @Component({
@@ -19,7 +20,9 @@ export class QuestionFormComponent implements OnInit {
   public selectedType: string = 'text';
   public pinPattern: string = '[0-9]{3}';
   public questionNumber: number = 1;
+  public labels = labelsData.questionForm;
   private questionHistory: QuestionDto[] = [];
+  private routes = routesData.routes;
 
   constructor(private fb: FormBuilder,
               private snackbarService: SnackbarService,
@@ -43,7 +46,7 @@ export class QuestionFormComponent implements OnInit {
     this.setupFormChanges();
   }
 
-  public validateMaxNumber() {
+  public validateMaxNumber(): void {
     const maxNumber = this.questionForm.get(FormConst.NAME_MAX_NUMBER)?.value;
     let answerNumber = this.questionForm.get(FormConst.NAME_ANSWER_NUMBER)?.value;
 
@@ -60,14 +63,14 @@ export class QuestionFormComponent implements OnInit {
     if (this.questionHistory.length > 0) {
       const puzzle: PuzzleDto = {
         questions: this.questionHistory,
-        message:''
+        message: ''
       };
 
       this.puzzleDataService.setPuzzleData(puzzle);
 
-      this.router.navigate(['/new-message']);
+      this.router.navigate(['/'+this.routes.createMessage]);
     } else {
-      this.snackbarService.openSnackbar('No questions to submit', 'Close', 3000);
+      this.snackbarService.openSnackbar(this.labels.emptyForm);
     }
   }
 
@@ -109,19 +112,8 @@ export class QuestionFormComponent implements OnInit {
       this.onTypeChange();
       this.questionNumber++;
     } else {
-      this.snackbarService.openSnackbar('Fill the fields', 'Close', 3000);
+      this.snackbarService.openSnackbar(this.labels.emptyFields);
     }
-  }
-
-
-  private resetForm(): void {
-    this.questionForm.patchValue({
-      description: '',
-      answerText: '',
-      answerNumber: '',
-      answerDate: '',
-      pin: ''
-    })
   }
 
   public validateMaxPinLength(): void {
@@ -136,6 +128,16 @@ export class QuestionFormComponent implements OnInit {
   public filterPinInput(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     inputElement.value = inputElement.value.replace(/[^0-9]/g, '');
+  }
+
+  private resetForm(): void {
+    this.questionForm.patchValue({
+      description: '',
+      answerText: '',
+      answerNumber: '',
+      answerDate: '',
+      pin: ''
+    })
   }
 
   private setupFormChanges(): void {
@@ -203,5 +205,4 @@ export class QuestionFormComponent implements OnInit {
         return true;
     }
   }
-
 }

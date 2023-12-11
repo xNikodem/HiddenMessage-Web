@@ -9,7 +9,7 @@
 
     <div class="file-section">
       <span>
-        Add Message from file (.txt only):
+        {{labels.addFromFileText}}
       </span>
       <div class="file-container">
         <input #fileInput
@@ -22,7 +22,7 @@
                 [class.active]="fileSelected"
                 class="choose-file-btn"
                 type="button">
-          Choose File
+          {{labels.chooseFile}}
         </button>
 
         <button (click)="loadFileContent()"
@@ -30,13 +30,13 @@
                 [title]="fileSelected ? '' : 'Choose file first'"
                 class="accept-btn"
                 type="button">
-          Accept
+          {{labels.acceptFile}}
         </button>
       </div>
     </div>
 
     <button type="submit">
-      Submit
+      {{labels.submit}}
     </button>
   </form>
 </div>

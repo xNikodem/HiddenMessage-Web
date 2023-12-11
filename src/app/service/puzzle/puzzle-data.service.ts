@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { PuzzleDto } from "../dto/puzzle.dto";
+import {Injectable} from '@angular/core';
+import {PuzzleDto} from "../../dto/puzzle.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +7,7 @@ import { PuzzleDto } from "../dto/puzzle.dto";
 export class PuzzleDataService {
   private puzzleData: PuzzleDto | null = null;
 
-  public setPuzzleData(data: PuzzleDto) {
+  public setPuzzleData(data: PuzzleDto): void {
     this.puzzleData = data;
   }
 
@@ -15,7 +15,7 @@ export class PuzzleDataService {
     return this.puzzleData;
   }
 
-  public clearData():void {
+  public clearData(): void {
     this.puzzleData = null;
   }
 }

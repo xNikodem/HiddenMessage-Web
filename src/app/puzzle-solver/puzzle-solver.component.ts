@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {PuzzleService} from "../service/puzzle.service";
-import {AuthService} from "../service/auth.service";
+import {PuzzleService} from "../service/puzzle/puzzle.service";
+import {AuthService} from "../service/auth/auth.service";
+import {SnackbarService} from "../notifications/snackbar.service";
+import {TYPE_PIN} from "../constants/form.const";
+import labelsData from "../../assets/i18n/messages.json";
 
 @Component({
   selector: 'app-puzzle-solver',
@@ -13,13 +16,16 @@ export class PuzzleSolverComponent implements OnInit {
   public userAnswer: any = '';
   public pins: string[] = [];
   public pinAnswer: string[] = [];
+  public labels = labelsData.puzzle;
   private uniqueId!: string;
   private correctAnswersCount!: number;
+  private readonly UNIQUEID_KEY='uniqueId'
 
   constructor(
     private route: ActivatedRoute,
     private puzzleService: PuzzleService,
-    private authService: AuthService
+    private authService: AuthService,
+    private snackbarService: SnackbarService
   ) {
   }
 
@@ -27,21 +33,18 @@ export class PuzzleSolverComponent implements OnInit {
     this.correctAnswersCount = 0;
     this.authService.logout();
     this.route.paramMap.subscribe(params => {
-      const id = params.get('uniqueId');
+      const id = params.get(this.UNIQUEID_KEY);
       if (id !== null) {
         this.uniqueId = id;
         this.loadNextQuestion();
-      } else {
-        console.error('UniqueId is null');
       }
     });
   }
 
   public submitAnswer(): void {
-    if (this.currentQuestion.type === 'pin') {
+    if (this.currentQuestion.type === TYPE_PIN) {
       this.userAnswer = this.pinAnswer.join('');
     }
-    console.log(this.userAnswer);
     this.puzzleService.checkAnswer(this.uniqueId, this.userAnswer, this.currentQuestion.questionId)
       .subscribe(
         result => {
@@ -49,11 +52,11 @@ export class PuzzleSolverComponent implements OnInit {
             this.correctAnswersCount++;
             this.loadNextQuestion();
           } else {
-            alert('Incorrect answer. Try again.');
+            this.snackbarService.openSnackbar(this.labels.wrongAnswer);
           }
         },
         error => {
-          console.error('Error submitting answer:', error);
+          this.snackbarService.openSnackbar(this.labels.submitAnswerError);
         }
       );
     this.userAnswer = '';
@@ -66,11 +69,11 @@ export class PuzzleSolverComponent implements OnInit {
     }
   }
 
-  loadNextQuestion(): void {
+  public loadNextQuestion(): void {
     this.puzzleService.getPuzzle(this.uniqueId, this.correctAnswersCount).subscribe(
       question => {
         this.currentQuestion = question;
-        if (this.currentQuestion.type === 'pin') {
+        if (this.currentQuestion.type === TYPE_PIN) {
           this.pins = new Array(this.currentQuestion.length).fill('');
         }
       },
@@ -78,7 +81,7 @@ export class PuzzleSolverComponent implements OnInit {
         if (error.status === 404) {
           this.loadPuzzleMessage();
         } else {
-          console.error('Error fetching next question:', error);
+          this.snackbarService.openSnackbar(this.labels.loadQuestionError)
         }
       }
     );
@@ -95,6 +98,7 @@ export class PuzzleSolverComponent implements OnInit {
         }
       }
     } else {
+      this.pinAnswer[index] = '';
       event.target.value = '';
     }
   }
@@ -105,8 +109,9 @@ export class PuzzleSolverComponent implements OnInit {
         console.log(message)
       },
       error => {
-        console.error('Error fetching puzzle message:', error);
+        this.snackbarService.openSnackbar(this.labels.loadMessageError);
       }
     );
   }
+
 }

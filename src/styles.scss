@@ -2,33 +2,16 @@ html, body {
   font-family: 'Dongle', sans-serif;
   margin: 0;
   padding: 0;
-}
-
-.text-container {
-  z-index: 100;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  position: absolute;
-  top: 0;
-  left: 0;
-  justify-content: center;
-  align-items: center;
-  font-size: 96px;
-  color: white;
-  opacity: 0.8;
-  user-select: none;
-  text-shadow: 1px 1px rgba(0,0,0,0.1);
-}
+  height: 100%; }
 
 :root {
   --color-bg1: rgb(23, 3, 66);
   --color-bg2: rgb(1, 3, 26);
-  --color1: 102, 0, 204;
-  --color2: 75, 0, 130;
-  --color3: 0, 0, 255;
-  --color4: 138, 43, 226;
-  --color5: 25, 25, 112;
+  --color1: 119, 9, 178;
+  --color2: 74, 11, 121;
+  --color3: 24, 24, 252;
+  --color4: 190, 8, 250;
+  --color5: 18, 18, 117;
   --color-interactive: 153, 50, 204;
   --circle-size: 80%;
   --blending: hard-light;
@@ -180,11 +163,13 @@ html, body {
     height: 100%;
     top: -50%;
     left: -50%;
-
     opacity: 0.7;
   }
 }
+html, body {
+  font-family: 'Dongle', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%; }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 

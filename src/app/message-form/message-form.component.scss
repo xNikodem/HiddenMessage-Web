@@ -36,7 +36,7 @@
       backdrop-filter: blur(15px);
       border: none;
       border-radius: $DEFAULT_BORDER_RADIUS_LOWEST;
-      color: white;
+      color: $COLOR-TEXT;
       margin-bottom: $DEFAULT_PAGE_MARGIN_LOWEST;
       padding: $DEFAULT_PAGE_PADDING_LOWEST;
     }
@@ -64,7 +64,7 @@
           background-color: $COLOR-PRIMARY;
 
           &:hover {
-            background-color: darken(#007bff, 10%);
+            background-color: $COLOR-PRIMARY-DARK;
           }
 
           &.active {
@@ -107,5 +107,4 @@
       }
     }
   }
-
 }

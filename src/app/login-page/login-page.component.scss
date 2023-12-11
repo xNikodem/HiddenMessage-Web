@@ -10,22 +10,21 @@
   padding: $DEFAULT_PAGE_PADDING;
   gap: $DEFAULT_GAP;
   border-radius: $DEFAULT_BORDER_RADIUS;
-  background: rgba(255, 255, 255, 0.15);
+  background: $COLOR-GREY-GLASS;
   backdrop-filter: blur(10px);
-  color: white;
+  color: $COLOR-TEXT;
   font-size: $FONT_SIZE_DEFAULT;
 
   .form-group {
     @include flex(column, center, center);
     margin-bottom: $DEFAULT_PAGE_MARGIN_LOWER;
 
-
     input {
-      background: rgba(0, 0, 0, 0.05);
+      background: $COLOR-SECONDARY;
       backdrop-filter: blur(15px);
       border: none;
       border-radius: $DEFAULT_BORDER_RADIUS_LOWEST;
-      color: white;
+      color: $COLOR-TEXT;
       margin-bottom: $DEFAULT_PAGE_MARGIN_LOWER;
       margin-top: $DEFAULT_PAGE_MARGIN_LOWEST;
       padding: $DEFAULT_PAGE_PADDING_LOWEST;
@@ -36,6 +35,10 @@
     button {
       font-size: $FONT_SIZE_SLIGHTLY_SMALLER;
     }
+  }
+
+  .error {
+    visibility: hidden;
   }
 }
 

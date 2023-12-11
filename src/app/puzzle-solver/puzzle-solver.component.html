@@ -1,33 +1,51 @@
 <div class="container">
   <div *ngIf="currentQuestion" class="glass-container">
-    <h2>Answer the question:</h2>
-    <h3>{{ currentQuestion.question }}</h3>
+    <h2>
+      {{labels.questionH2}}
+    </h2>
 
-    <!-- For text input -->
-    <input *ngIf="currentQuestion.type === 'text'" [(ngModel)]="userAnswer"
-           type="text" [maxLength]="currentQuestion.length"
-           class="answer-input" placeholder="Your answer">
+    <h3>
+      {{ currentQuestion.question }}
+    </h3>
 
-    <!-- For number input -->
-    <input *ngIf="currentQuestion.type === 'number'" type="number" [(ngModel)]="userAnswer"
-           [max]="currentQuestion.length" (input)="validateNumberInput($event, currentQuestion.length)">
+    <input *ngIf="currentQuestion.type === 'text'"
+           [(ngModel)]="userAnswer"
+           [maxLength]="currentQuestion.length"
+           class="answer-input"
+           placeholder="Your answer"
+           type="text">
 
-    <!-- For date input -->
-    <input *ngIf="currentQuestion.type === 'date'" [(ngModel)]="userAnswer"
-           type="date" class="answer-input" placeholder="Your answer">
+    <input (input)="validateNumberInput($event, currentQuestion.length)"
+           *ngIf="currentQuestion.type === 'number'"
+           [(ngModel)]="userAnswer"
+           [max]="currentQuestion.length" type="number">
 
-    <!-- For PIN input -->
-    <div *ngIf="currentQuestion.type === 'pin'">
+    <input *ngIf="currentQuestion.type === 'date'"
+           [(ngModel)]="userAnswer"
+           class="answer-input"
+           placeholder="Your answer"
+           type="date">
+
+    <div *ngIf="currentQuestion.type === 'pin'"
+         class="pin-container">
       <div *ngFor="let item of pins; let i = index">
-        <input type="text" (keyup)="handlePinInput($event, i)" [attr.data-id]="i" maxlength="1">
+        <input (keyup)="handlePinInput($event, i)"
+               [attr.data-id]="i"
+               [ngClass]="{'filled-input': pinAnswer[i] != null||''}"
+               maxlength="1" type="text">
       </div>
     </div>
 
-
-    <button (click)="submitAnswer()" class="submit-btn">Send Answer</button>
+    <button (click)="submitAnswer()"
+            class="submit-btn">
+      {{labels.submit}}
+    </button>
   </div>
 
-  <div *ngIf="!currentQuestion" class="no-question">
-    <p>Loading Question...</p>
+  <div *ngIf="!currentQuestion"
+       class="no-question">
+    <p>
+      Loading Question...
+    </p>
   </div>
 </div>

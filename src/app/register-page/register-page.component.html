@@ -1,90 +1,58 @@
-<div class="gradient-bg">
-  <svg xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <filter id="goo">
-        <feGaussianBlur in="SourceGraphic"
-                        result="blur"
-                        stdDeviation="10"/>
+<app-interactive-background></app-interactive-background>
 
-        <feColorMatrix in="blur"
-                       mode="matrix"
-                       result="goo"
-                       values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"/>
+<div class="glass-container">
+  <form (ngSubmit)="onSubmit()"
+        [formGroup]="registerForm"
+        class="register-form">
+    <div class="form-group">
+      <label for="username">
+        {{ labels.usernameLabel }}
+      </label>
 
-        <feBlend in="SourceGraphic"
-                 in2="goo"/>
-      </filter>
-    </defs>
-  </svg>
+      <input formControlName="username"
+             id="username"
+             type="text">
 
-  <div class="gradients-container">
-    <div class="g1"></div>
-
-    <div class="g2"></div>
-
-    <div class="g3"></div>
-
-    <div class="g4"></div>
-
-    <div class="g5"></div>
-
-    <div class="interactive"></div>
-  </div>
-
-  <div class="glass-container">
-    <form (ngSubmit)="onSubmit()"
-          [formGroup]="registerForm"
-          class="register-form">
-      <div class="form-group">
-        <label for="username">
-          Username
-        </label>
-
-        <input formControlName="username"
-               id="username"
-               type="text">
-
-        <div [class.show]="isFieldInvalid('username', 'required')"
-             class="error-message">
-          Username is required.
-        </div>
+      <div [class.show]="isFieldInvalid('username', 'required')"
+           class="error-message">
+        {{ labels.usernameRequired }}
       </div>
+    </div>
 
-      <div class="form-group">
-        <label for="password">
-          Password
-        </label>
+    <div class="form-group">
+      <label for="password">
+        {{ labels.passwordLabel }}
+      </label>
 
-        <input formControlName="password"
-               id="password"
-               type="password">
-        <div
-          [class.show]="isFieldInvalid('password', 'required')"
-             class="error-message">
-          Password is required.
-        </div>
+      <input formControlName="password"
+             id="password"
+             type="password">
+      <div
+        [class.show]="isFieldInvalid('password', 'required')"
+        class="error-message">
+        {{ labels.passwordRequired }}
       </div>
+    </div>
 
-      <div class="form-group">
-        <label for="confirmPassword">
-          Password
-        </label>
+    <div class="form-group">
+      <label for="confirmPassword">
+        {{ labels.confirmPasswordLabel }}
+      </label>
 
-        <input formControlName="confirmPassword"
-               id="confirmPassword"
-               type="password">
+      <input formControlName="confirmPassword"
+             id="confirmPassword"
+             type="password">
 
-        <div [class.show]="isFieldInvalid('confirmPassword', 'mustMatch')"
-             class="error-message">
-          Passwords must match.
-        </div>
+      <div [class.show]="isFieldInvalid('confirmPassword', 'mustMatch')"
+           class="error-message">
+        {{ labels.passwordsMustMatch }}
       </div>
+    </div>
 
-      <button class="submit-button"
-              type="submit">
-        Register
-      </button>
-    </form>
-    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-  </div>
+    <button class="submit-button"
+            type="submit">
+      {{ labels.registerButton }}
+    </button>
+  </form>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
 </div>
