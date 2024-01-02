@@ -5,6 +5,7 @@ import {AuthService} from "../service/auth/auth.service";
 import {SnackbarService} from "../notifications/snackbar.service";
 import {TYPE_PIN} from "../constants/form.const";
 import labelsData from "../../assets/i18n/messages.json";
+import {VisitService} from "../service/activity/visit.service";
 
 @Component({
   selector: 'app-puzzle-solver',
@@ -27,7 +28,8 @@ export class PuzzleSolverComponent implements OnInit {
     private route: ActivatedRoute,
     private puzzleService: PuzzleService,
     private authService: AuthService,
-    private snackbarService: SnackbarService
+    private snackbarService: SnackbarService,
+    private visitService: VisitService,
   ) {
   }
 
@@ -39,6 +41,7 @@ export class PuzzleSolverComponent implements OnInit {
       const id = params.get(this.UNIQUEID_KEY);
       if (id !== null) {
         this.uniqueId = id;
+        this.registerPuzzleVisit(); // Wywołanie nowej metody
         this.loadNextQuestion();
       }
     });
@@ -106,11 +109,24 @@ export class PuzzleSolverComponent implements OnInit {
     }
   }
 
+  private registerPuzzleVisit(): void {
+    const deviceType = this.detectDeviceType();
+    this.visitService.registerVisit(this.uniqueId, deviceType).subscribe();
+  }
+
+  private detectDeviceType(): string {
+    const userAgent = window.navigator.userAgent;
+    if (/mobile/i.test(userAgent)) {
+      return 'mobile';
+    }
+    return 'desktop';
+  }
+
   private loadPuzzleMessage(): void {
     this.puzzleService.getPuzzleMessage(this.uniqueId).subscribe(
       message => {
         this.puzzleCompleted = true;
-        this.hiddenMessage=message;
+        this.hiddenMessage = message;
         console.log(message);
       },
       error => {

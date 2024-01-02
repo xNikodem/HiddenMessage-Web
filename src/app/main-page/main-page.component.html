@@ -1,6 +1,6 @@
 <app-interactive-background></app-interactive-background>
 
-<div class="glass-container">
+<div *ngIf="!hasCreatedPuzzle" class="glass-container">
   <h2>
     {{labels.createH2}}  </h2>
 
@@ -9,4 +9,6 @@
     {{labels.createButton}}
   </button>
 </div>
-
+<div *ngIf="hasCreatedPuzzle" class="glass-container">
+  <p>masz juz zagadke</p>
+</div>
