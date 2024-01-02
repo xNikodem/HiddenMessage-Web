@@ -17,6 +17,7 @@ import {JwtInterceptor} from "./security/jwt.interceptor";
 import {MessageFormComponent} from './message-form/message-form.component';
 import {PuzzleSolverComponent} from './puzzle-solver/puzzle-solver.component';
 import {InteractiveBackgroundComponent} from './interactive-background/interactive-background.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {InteractiveBackgroundComponent} from './interactive-background/interacti
     RegisterPageComponent,
     MessageFormComponent,
     PuzzleSolverComponent,
-    InteractiveBackgroundComponent
+    InteractiveBackgroundComponent,
+    ProfilePageComponent
   ],
   imports: [
     BrowserModule,

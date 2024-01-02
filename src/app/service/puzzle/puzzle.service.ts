@@ -35,6 +35,10 @@ export class PuzzleService {
     });
   }
 
+  public hasUserCreatedPuzzle(): Observable<boolean> {
+    return this.http.get<boolean>(`${PUZZLE_API}/has-puzzle`);
+  }
+
 
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
