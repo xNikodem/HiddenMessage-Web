@@ -1,0 +1,58 @@
+<app-interactive-background></app-interactive-background>
+
+<div class="glass-container">
+  <form (ngSubmit)="onSubmit()"
+        [formGroup]="registerForm"
+        class="register-form">
+    <div class="form-group">
+      <label for="username">
+        {{ labels.usernameLabel }}
+      </label>
+
+      <input formControlName="username"
+             id="username"
+             type="text">
+
+      <div [class.show]="isFieldInvalid('username', 'required')"
+           class="error-message">
+        {{ labels.usernameRequired }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">
+        {{ labels.passwordLabel }}
+      </label>
+
+      <input formControlName="password"
+             id="password"
+             type="password">
+      <div
+        [class.show]="isFieldInvalid('password', 'required')"
+        class="error-message">
+        {{ labels.passwordRequired }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">
+        {{ labels.confirmPasswordLabel }}
+      </label>
+
+      <input formControlName="confirmPassword"
+             id="confirmPassword"
+             type="password">
+
+      <div [class.show]="isFieldInvalid('confirmPassword', 'mustMatch')"
+           class="error-message">
+        {{ labels.passwordsMustMatch }}
+      </div>
+    </div>
+
+    <button class="submit-button"
+            type="submit">
+      {{ labels.registerButton }}
+    </button>
+  </form>
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+</div>

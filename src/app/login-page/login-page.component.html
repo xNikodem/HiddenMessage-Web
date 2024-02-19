@@ -1,0 +1,43 @@
+<app-interactive-background></app-interactive-background>
+
+<div class="glass-container">
+  <form (ngSubmit)="onSubmit()"
+        [formGroup]="loginForm"
+        class="login-form">
+
+    <div class="form-group">
+      <label for="username">
+        {{ labels.usernameLabel }}
+      </label>
+
+      <input formControlName="username"
+             id="username"
+             required
+             type="text">
+    </div>
+
+    <div class="form-group">
+      <label for="password">
+        {{ labels.passwordLabel }}
+      </label>
+      <input formControlName="password"
+             id="password"
+             required
+             type="password">
+    </div>
+
+    <button class="submit-button"
+            type="submit">
+      {{ labels.signInButton }}
+    </button>
+
+    <button (click)="navigateToRegister()"
+            class="register-button">
+      {{ labels.signUpButton }}
+    </button>
+  </form>
+  <div [style.visibility]="loginError ? 'visible' : 'hidden'"
+       class="error">
+    {{ loginError }}
+  </div>
+</div>

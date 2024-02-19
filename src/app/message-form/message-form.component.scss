@@ -1,0 +1,120 @@
+@import "../styles/glass.styles.scss";
+@import "../styles/mixin-basics";
+@import "../styles/colors";
+
+
+.glass-container {
+
+  label {
+    background: none;
+    color: $COLOR-TEXT;
+  }
+
+  textarea {
+    @include width-height(90%, 50vh);
+    max-height: 30rem;
+    font-size: $FONT_SIZE_SLIGHTLY_SMALLER;
+    resize: none;
+
+    @media (max-width: 480px) {
+      font-size: $FONT_SIZE_PAGE_TITLE_SMALLER;
+    }
+  }
+
+  textarea,
+  button {
+    background: $COLOR-SECONDARY;
+    backdrop-filter: blur(15px);
+    border: none;
+    border-radius: $DEFAULT_BORDER_RADIUS_LOWEST;
+    color: $COLOR-TEXT;
+    margin-bottom: $DEFAULT_PAGE_MARGIN_LOWEST;
+    padding: $DEFAULT_PAGE_PADDING_LOWEST;
+  }
+
+  .file-section {
+    span {
+      color: $COLOR-TEXT;
+      font-size: $FONT_SIZE_DEFAULT;
+    }
+
+    .file-container {
+      @include flex(row, center, center);
+      gap: $DEFAULT_GAP_GREATER;
+      margin-top: $DEFAULT_PAGE_MARGIN_LOWER;
+
+      .choose-file-btn,
+      .accept-btn {
+        transition: background-color 0.3s;
+        padding: $DEFAULT_PAGE_PADDING_LOWEST;
+        min-width: 10rem;
+        color: $COLOR-TEXT;
+      }
+
+      .choose-file-btn {
+        background-color: $COLOR-PRIMARY;
+
+        &:hover {
+          background-color: $COLOR-PRIMARY-DARK;
+        }
+
+        &.active {
+          background: $COLOR-SECONDARY;
+          cursor: pointer;
+          transition: background-color 0.3s;
+
+          &:hover {
+            background-color: $COLOR-HOVER;
+          }
+        }
+      }
+
+      .accept-btn {
+        background: $COLOR-SECONDARY;
+
+        &:hover {
+          cursor: not-allowed;
+        }
+
+        &.active {
+          background-color: $COLOR-PRIMARY;
+          color: $COLOR-TEXT;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $COLOR-PRIMARY-DARK;
+          }
+        }
+      }
+    }
+  }
+
+  .message-link-container {
+    @include flex(column, center, center);
+
+    a {
+      background: $COLOR-SECONDARY;
+      backdrop-filter: blur(15px);
+      border: none;
+      border-radius: $DEFAULT_BORDER_RADIUS_LOWEST;
+      color: $COLOR-TEXT;
+      margin-bottom: $DEFAULT_PAGE_MARGIN;
+      padding: $DEFAULT_PAGE_PADDING_LOWEST;
+      transition: color 0.3s;
+
+      &:hover {
+        color: $COLOR-HOVER;
+      }
+    }
+  }
+
+  button {
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: $COLOR-HOVER;
+    }
+  }
+}
+

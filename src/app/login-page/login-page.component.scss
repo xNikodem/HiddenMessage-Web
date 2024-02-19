@@ -1,0 +1,32 @@
+@import 'src/app/styles/glass.styles';
+@import "../styles/mixin-basics";
+
+.glass-container {
+
+  .form-group {
+    @include flex(column, center, center);
+    margin-bottom: $DEFAULT_PAGE_MARGIN_LOWER;
+
+    input {
+      background: $COLOR-SECONDARY;
+      backdrop-filter: blur(15px);
+      border: none;
+      border-radius: $DEFAULT_BORDER_RADIUS_LOWEST;
+      color: $COLOR-TEXT;
+      margin-bottom: $DEFAULT_PAGE_MARGIN_LOWER;
+      margin-top: $DEFAULT_PAGE_MARGIN_LOWEST;
+      padding: $DEFAULT_PAGE_PADDING_LOWEST;
+      width: 90%;
+      font-size: $FONT_SIZE_DEFAULT;
+    }
+
+    button {
+      font-size: $FONT_SIZE_SLIGHTLY_SMALLER;
+    }
+  }
+
+  .error {
+    visibility: hidden;
+  }
+}
+

@@ -1,0 +1,14 @@
+export const DEFAULT_TEXT_MAX_LENGTH = 10;
+export const DEFAULT_MAX_NUMBER = 999;
+export const MIN_PIN_LENGTH = 3;
+export const MAX_PIN_LENGTH = 8;
+export const TYPE_TEXT = 'text';
+export const TYPE_NUMBER = 'number';
+export const TYPE_DATE = 'date';
+export const TYPE_PIN = 'pin';
+export const TYPE = 'type';
+export const NAME_PIN_LENGTH = 'pinLength';
+export const NAME_MAX_NUMBER = 'maxNumber';
+export const NAME_ANSWER_NUMBER = 'answerNumber';
+export const NAME_TEXT_MAX = 'textMaxLength';
+export const NAME_ANSWER_TEXT = 'answerText';
